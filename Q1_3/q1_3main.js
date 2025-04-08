@@ -21,7 +21,7 @@ function inputAgeGetTicketPrice(){
                 read.close();
             }
             else{
-                console.log("請輸入正確的數字!");
+                console.log("請輸入正確的數字");
                 read.close();
             }    
         });
