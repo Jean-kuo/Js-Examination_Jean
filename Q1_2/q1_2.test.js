@@ -1,6 +1,7 @@
 
+import {dividedby3} from './1_2module.js';
 const readline = require('readline');//預設匯出
-const {dividedby3} = require('./stage1_2')//具名匯出
+//const {dividedby3} = require('./stage1_2')//具名匯出
 
 
 jest.mock('readline', () => {
