@@ -1,5 +1,6 @@
-const {isthereZero} = require('./stage1_1');
+//const {isthereZero} = require('./stage1_1');//原先寫法//commonJS
 
+import {isThereZero} from './1_1module.js';//ES6
 const readline = require('readline');
 
 jest.mock('readline', () => {
