@@ -3,26 +3,28 @@
 試用「[比較運算子](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Comparison)」
 // 寫一程式，讓使用者自行輸入年齡，並判斷門票價錢。 */
 
-const readline=require('readline');
+import {isValidInteger} from "../common_modules/userInputConditionals.js";
+import {calculateTicketPrice} from "./1_3module.js";
+
+import readline from 'readline';
 const read = readline.createInterface({
     input : process.stdin,
     output : process.stdout,
 });
 
-let ticket = 400;
-let price = ticket/2;
-
-read.question("請輸入年齡:",function (age) {
+function inputAgeGetTicketPrice(){
     return new Promise((resolve) => {
-        if ((Number(age)<=6)|(Number(age)>=65)){
-            console.log("票價優惠"+price+"元")
-        }
-        else{
-            console.log("票價為"+ticket+"元")
-        };
-        read.close();
-    })
-    
-});
-
-module.exports = {inputAgeGetTicketPrice, calculateTicketPrice};
+        read.question("請輸入年齡:", function(age){
+            if (isValidInteger(age)) {
+                const resultPrice = calculateTicketPrice(age);
+                resolve (resultPrice);
+                read.close();
+            }
+            else{
+                console.log("請輸入正確的數字!");
+                read.close();
+            }    
+        });
+    });
+}
+inputAgeGetTicketPrice().then ((resultPrice) => {console.log(resultPrice)});

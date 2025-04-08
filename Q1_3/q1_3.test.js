@@ -1,6 +1,21 @@
-const {inputAgeGetTicketPrice, calculateTicketPrice} = require('./stage1_3');
-
+//const {inputAgeGetTicketPrice, calculateTicketPrice} = require('./stage1_3');
+import {calculateTicketPrice} from './1_3module';
 const readline = require('readline');
+
+
+// jest.mock('readline', () => {
+//     return{
+//             createInterface:jest.fn().mockReturnValueOnce({
+//                 question: jest.fn((question, callback) => {
+//                 callback('5');
+//                 }),
+//             close: jest.fn()
+//         })
+//     };
+// });
+// const createInterface = readline.createInterface
+
+
 
 test('input your age and output the suitable ticket price ', async () => {
     
