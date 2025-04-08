@@ -1,25 +1,25 @@
-const {ValueN, umleven} = require('./stage1_5')
 
+import {isValueNaEVENnumber, umleven} from './1_5module';
 const readline = require('readline')
 
+jest.mock('readline', () => {
+    return{
+            createInterface:jest.fn().mockReturnValueOnce({
+            question: jest.fn((question, callback) => {
+            callback('5');
+            }),
+            close: jest.fn()
+        })
+    };
+});
 
-describe('check getValueN function', () => {
-    test('getValueN callback resolve or reject', async() => {
-        const a = await jest.mock('readline', () => {
-            return{
-                    createInterface:jest.fn().mockReturnValueOnce({
-                    question: jest.fn((question, callback) => {
-                    callback('5');
-                    }),
-                    close: jest.fn()
-                })
-            };
-        });
-        const result = getValueN(a);
-        expect(result).resolves.toBe(6);
-        //jest.spyOn(readline, 'createInterface').mockReturnValue(4);
-        // const result = getValueN(4);
-        // expect(result).resolves.toBe(4)
-        
-    });
-})
+test('ValueN is EVEN number', () =>{
+    expect(isValueNaEVENnumber(4)).toBeTruthy();
+    expect(isValueNaEVENnumber(2)).toBeFalsy();
+    expect(isValueNaEVENnumber(7)).toBeFalsy();
+
+});
+test('umleven', () => {
+    let sum = umleven(8);
+    expect(sum).toBe(80);
+});
