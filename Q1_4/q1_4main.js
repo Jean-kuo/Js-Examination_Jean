@@ -7,14 +7,22 @@ const read = readline.createInterface({
     output : process.stdout,
 });
 
+
 read.question("輸入n值:",function (todo) {
     const n = Number(todo)
-    const sum = count(n);
-    equation(n);
     
-    console.log(sum);   
+    //以下count計算用
+    const sum = count(n);
+    //以下列出算式用
+    const arrayX = equation2(n);
+    
+    console.log(arrayX.join("")+sum);
+    //result+sum 被誤判定成運算而非字串串聯,所以結果為NaN
+    //result出現undefined, equation沒有回返值給result
+    
     read.close();
 });
+module.exports = {count, equation2};
 
 //count計算用
 function count(n){
@@ -36,26 +44,28 @@ function count(n){
         sum = 0;
     }
     
-    return sum; 
+    return sum; //不必加sum= 運算結果已經會自己返回給sum
 }
 
-//以下使用process.stdout.write直接輸出文字到控制台 不用考慮return ，列出算式用
 
-function equation(n) {
+
+//方案2:列入陣列再用join輸出 有回傳值可以測試
+function equation2(n){
     if (n !== 0){
-        process.stdout.write('1');
-        for (var j = 2; j < (n+1); j++){
-            if (j%2 == 0){
-                process.stdout.write("+"+j)
-            }
-            if(j%2 != 0){
-                process.stdout.write("-"+j)
-            }
-        };
-        process.stdout.write("=");
+        let array1 = ["1"];
+        for (var k = 2; k < (n+1); k++){
+            if (k % 2 == 0){
+                array1.push("+"+k);
+                }
+            if (k % 2 !== 0){
+                array1.push("-"+k);
+                }
+            };
+        array1.push("=");
+        return array1;
     }
     else{
-        process.stdout.write("0=");
-    }
-    
+        let array2 = ["0="];
+        return array2;
+        };
 }

@@ -8,28 +8,50 @@ const read = readline.createInterface({
     output : process.stdout,
 });
 
-read.question("請輸入n值:",function(todo){
-    var n=Number(todo);
-    var sum=0;
-    function umleven(n){
-        if(n <= 3) {
-            return 0
-        };
-        if(n % 2 == 0){
-            sum=n*(n - 2);
-        }
-        return sum + umleven(n - 2);
-    }
-    var result=umleven(n);
-    console.log(result);
-    read.close();
-});
 
-//遞迴函數 注意加上終止條件
-// function umleven(n){
-//     if (n<=2){
-//         return 0;
-//     }
-//     sum=n * (n - 2);
-//     return sum + umleven(n - 2);
-// }
+function getValueNAndCheck(){
+    return new Promise ((resolve, reject) => {
+        read.question("請輸入偶數且最小為4的n值:", function(todo){
+            let n = Number(todo);
+            //console.log("輸入的"+n)
+            if (ValueN(n)){
+                //console.log("回傳的"+n)
+                resolve(n);
+            }
+            else{
+                //console.log("錯誤的"+n)
+                const m = "輸入n值有誤";
+                reject(m);
+            }
+            //read.close();
+        });
+    })
+}
+getValueNAndCheck()
+.then((n) => {
+    const sum = umleven(n);
+    console.log("求算總和為:"+sum);
+    //read.close();
+})
+.catch((m) => {
+    console.log(m);
+    //read.close();
+})
+.finally(() => {
+    read.close();
+})
+
+module.exports = {ValueN, getValueNAndCheck, umleven};
+
+//判斷輸入n值為n>=4 且 n為偶數  
+function ValueN(n){
+    // if ((n >= 4) && (n % 2 == 0)){
+    //     return true;
+    // }
+    // else{
+    //     return false;
+    // }
+
+    const result = (n >= 4) && (n % 2 == 0) ? true : false;
+    return result;
+}

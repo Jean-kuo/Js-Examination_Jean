@@ -24,3 +24,5 @@ read.question("請輸入年齡:",function (age) {
     })
     
 });
+
+module.exports = {inputAgeGetTicketPrice, calculateTicketPrice};

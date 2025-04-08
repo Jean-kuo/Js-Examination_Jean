@@ -25,3 +25,5 @@ function isThereZero(people){
         result = "照常電影播放";}
     return result;
 }
+
+module.exports = {isThereZero};
